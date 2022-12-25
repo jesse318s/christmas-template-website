@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="Christmas Website" />
+    <title>Merry Christmas!</title>
+    <style>
+      :root {
+        --main-bg: #ededed;
+        --trunk-bg-1: #5e2100;
+        --trunk-bg-2: #783e00;
+        --leaves-bottom-bg-1: #087208;
+        --leaves-bottom-bg-2: #1c7c1c;
+        --leaves-middle-bg-1: #117911;
+        --leaves-middle-bg-2: #268926;
+        --leaves-top-bg-1: #187e18;
+        --leaves-top-bg-2: #2c982c;
+        --shine-bg: #ff5e3e;
+        --snow-bg: #ffffff;
+        --tree-width: 200px;
+        --tree-height: 400px;
+        --tree-rotate: -15deg;
+        --trunk-width: 30px;
+        --trunk-height: 400px;
+        --trunk-angle: 4.3deg;
+        --leaves-translate: 15px;
+        --leaves-bottom-width: 100px;
+        --leaves-bottom-height: 320px;
+        --leaves-bottom-angle: 18.2deg;
+        --leaves-middle-width: 80px;
+        --leaves-middle-height: 220px;
+        --leaves-middle-angle: 21.4deg;
+        --leaves-top-width: 60px;
+        --leaves-top-height: 140px;
+        --leaves-top-angle: 25.5deg;
+        --star-size: 20px;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+      }
+
+      body {
+        overflow: hidden;
+      }
+
+      .ts-3d {
+        transform-style: preserve-3d;
+      }
+
+      .container {
+        background-color: var(--main-bg);
+        width: 100%;
+        min-height: 100%;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .tree {
+        width: var(--tree-width);
+        height: var(--tree-height);
+        position: relative;
+        transform-style: preserve-3d;
+        transform: rotateX(var(--tree-rotate));
+      }
+
+      .trunk,
+      .leaves-bottom,
+      .leaves-middle,
+      .leaves-top {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        animation: 10s tree-rotate linear infinite;
+      }
+
+      .trunk div {
+        border-top: none;
+        border-left: solid var(--trunk-width) transparent;
+        border-right: solid var(--trunk-width) transparent;
+        position: absolute;
+        bottom: 0;
+        left: calc(50% - var(--trunk-width));
+        transform-origin: bottom;
+      }
+
+      .trunk div:nth-child(1) {
+        border-bottom: solid var(--trunk-height) var(--trunk-bg-1);
+        transform: rotateX(var(--trunk-angle)) translateY(2px)
+          translateZ(var(--trunk-width));
+      }
+
+      .trunk div:nth-child(2) {
+        border-bottom: solid var(--trunk-height) var(--trunk-bg-2);
+        transform: rotateY(90deg) rotateX(calc(var(--trunk-angle) * -1))
+          translateY(2px) translateZ(calc(var(--trunk-width) * -1));
+      }
+
+      .trunk div:nth-child(3) {
+        border-bottom: solid var(--trunk-height) var(--trunk-bg-1);
+        transform: rotateX(calc(var(--trunk-angle) * -1)) translateY(2px)
+          translateZ(calc(var(--trunk-width) * -1));
+      }
+
+      .trunk div:nth-child(4) {
+        border-bottom: solid var(--trunk-height) var(--trunk-bg-2);
+        transform: rotateY(-90deg) rotateX(calc(var(--trunk-angle) * -1))
+          translateY(2px) translateZ(calc(var(--trunk-width) * -1));
+      }
+
+      .leaves-bottom div {
+        border-top: none;
+        border-left: solid var(--leaves-bottom-width) transparent;
+        border-right: solid var(--leaves-bottom-width) transparent;
+        position: absolute;
+        top: var(--star-size);
+        left: calc(50% - var(--leaves-bottom-width));
+        transform-origin: bottom;
+      }
+
+      .leaves-bottom div:nth-child(1) {
+        border-bottom: solid var(--leaves-bottom-height)
+          var(--leaves-bottom-bg-1);
+        transform: rotateX(var(--leaves-bottom-angle))
+          translateY(var(--leaves-translate))
+          translateZ(var(--leaves-bottom-width));
+      }
+
+      .leaves-bottom div:nth-child(2) {
+        border-bottom: solid var(--leaves-bottom-height)
+          var(--leaves-bottom-bg-2);
+        transform: rotateY(90deg) rotateX(calc(var(--leaves-bottom-angle) * -1))
+          translateY(var(--leaves-translate))
+          translateZ(calc(var(--leaves-bottom-width) * -1));
+      }
+
+      .leaves-bottom div:nth-child(3) {
+        border-bottom: solid var(--leaves-bottom-height)
+          var(--leaves-bottom-bg-1);
+        transform: rotateX(calc(var(--leaves-bottom-angle) * -1))
+          translateY(var(--leaves-translate))
+          translateZ(calc(var(--leaves-bottom-width) * -1));
+      }
+
+      .leaves-bottom div:nth-child(4) {
+        border-bottom: solid var(--leaves-bottom-height)
+          var(--leaves-bottom-bg-2);
+        transform: rotateY(-90deg)
+          rotateX(calc(var(--leaves-bottom-angle) * -1))
+          translateY(var(--leaves-translate))
+          translateZ(calc(var(--leaves-bottom-width) * -1));
+      }
+
+      .leaves-middle div {
+        border-top: none;
+        border-left: solid var(--leaves-middle-width) transparent;
+        border-right: solid var(--leaves-middle-width) transparent;
+        position: absolute;
+        top: var(--star-size);
+        left: calc(50% - var(--leaves-middle-width));
+        transform-origin: bottom;
+      }
+
+      .leaves-middle div:nth-child(1) {
+        border-bottom: solid var(--leaves-middle-height)
+          var(--leaves-middle-bg-1);
+        transform: rotateX(var(--leaves-middle-angle))
+          translateY(var(--leaves-translate))
+          translateZ(var(--leaves-middle-width));
+      }
+
+      .leaves-middle div:nth-child(2) {
+        border-bottom: solid var(--leaves-middle-height)
+          var(--leaves-middle-bg-2);
+        transform: rotateY(90deg) rotateX(calc(var(--leaves-middle-angle) * -1))
+          translateY(var(--leaves-translate))
+          translateZ(calc(var(--leaves-middle-width) * -1));
+      }
+
+      .leaves-middle div:nth-child(3) {
+        border-bottom: solid var(--leaves-middle-height)
+          var(--leaves-middle-bg-1);
+        transform: rotateX(calc(var(--leaves-middle-angle) * -1))
+          translateY(var(--leaves-translate))
+          translateZ(calc(var(--leaves-middle-width) * -1));
+      }
+
+      .leaves-middle div:nth-child(4) {
+        border-bottom: solid var(--leaves-middle-height)
+          var(--leaves-middle-bg-2);
+        transform: rotateY(-90deg)
+          rotateX(calc(var(--leaves-middle-angle) * -1))
+          translateY(var(--leaves-translate))
+          translateZ(calc(var(--leaves-middle-width) * -1));
+      }
+
+      .leaves-top div {
+        border-top: none;
+        border-left: solid var(--leaves-top-width) transparent;
+        border-right: solid var(--leaves-top-width) transparent;
+        position: absolute;
+        top: var(--star-size);
+        left: calc(50% - var(--leaves-top-width));
+        transform-origin: bottom;
+      }
+
+      .leaves-top div:nth-child(1) {
+        border-bottom: solid var(--leaves-top-height) var(--leaves-top-bg-1);
+        transform: rotateX(var(--leaves-top-angle))
+          translateY(var(--leaves-translate))
+          translateZ(var(--leaves-top-width));
+      }
+
+      .leaves-top div:nth-child(2) {
+        border-bottom: solid var(--leaves-top-height) var(--leaves-top-bg-2);
+        transform: rotateY(90deg) rotateX(calc(var(--leaves-top-angle) * -1))
+          translateY(var(--leaves-translate))
+          translateZ(calc(var(--leaves-top-width) * -1));
+      }
+
+      .leaves-top div:nth-child(3) {
+        border-bottom: solid var(--leaves-top-height) var(--leaves-top-bg-1);
+        transform: rotateX(calc(var(--leaves-top-angle) * -1))
+          translateY(var(--leaves-translate))
+          translateZ(calc(var(--leaves-top-width) * -1));
+      }
+
+      .leaves-top div:nth-child(4) {
+        border-bottom: solid var(--leaves-top-height) var(--leaves-top-bg-2);
+        transform: rotateY(-90deg) rotateX(calc(var(--leaves-top-angle) * -1))
+          translateY(var(--leaves-translate))
+          translateZ(calc(var(--leaves-top-width) * -1));
+      }
+
+      @keyframes tree-rotate {
+        0% {
+          transform: rotateX(0deg) rotateY(0deg);
+        }
+        99.99999% {
+          transform: rotateX(0deg) rotateY(359deg);
+        }
+      }
+
+      .shadow {
+        background-color: rgba(0, 0, 0, 0.8);
+        width: calc(var(--leaves-bottom-width) * 2);
+        height: calc(var(--leaves-bottom-width) * 2);
+        filter: blur(calc(var(--leaves-bottom-width) / 2));
+        position: absolute;
+        bottom: calc(var(--leaves-bottom-width) * -1);
+        left: calc(50% - var(--leaves-bottom-width));
+        transform: rotateX(90deg) translateX(-50%);
+        animation: 10s shadow-rotate linear infinite;
+      }
+
+      @keyframes shadow-rotate {
+        0% {
+          transform: rotateX(-90deg) rotateZ(0deg);
+        }
+        99.99999% {
+          transform: rotateX(-90deg) rotateZ(359deg);
+        }
+      }
+
+      .star-1 {
+        transform: translateZ(-2px);
+        animation: 10s star-1-rotate linear infinite;
+      }
+
+      @keyframes star-1-rotate {
+        0% {
+          transform: rotateX(0deg) rotateY(0deg) translateZ(-2px);
+        }
+        99.99999% {
+          transform: rotateX(0deg) rotateY(359deg) translateZ(-2px);
+        }
+      }
+
+      .star-2 {
+        transform: translateZ(-1px);
+        animation: 10s star-2-rotate linear infinite;
+      }
+
+      @keyframes star-2-rotate {
+        0% {
+          transform: rotateX(0deg) rotateY(0deg) translateZ(-1px);
+        }
+        99.99999% {
+          transform: rotateX(0deg) rotateY(359deg) translateZ(-1px);
+        }
+      }
+
+      .star-3 {
+        transform: translateZ(0px);
+        animation: 10s star-3-rotate linear infinite;
+      }
+
+      @keyframes star-3-rotate {
+        0% {
+          transform: rotateX(0deg) rotateY(0deg) translateZ(0px);
+        }
+        99.99999% {
+          transform: rotateX(0deg) rotateY(359deg) translateZ(0px);
+        }
+      }
+
+      .star-4 {
+        transform: translateZ(1px);
+        animation: 10s star-4-rotate linear infinite;
+      }
+
+      @keyframes star-4-rotate {
+        0% {
+          transform: rotateX(0deg) rotateY(0deg) translateZ(1px);
+        }
+        99.99999% {
+          transform: rotateX(0deg) rotateY(359deg) translateZ(1px);
+        }
+      }
+
+      .star-5 {
+        transform: translateZ(2px);
+        animation: 10s star-5-rotate linear infinite;
+      }
+
+      @keyframes star-5-rotate {
+        0% {
+          transform: rotateX(0deg) rotateY(0deg) translateZ(2px);
+        }
+        99.99999% {
+          transform: rotateX(0deg) rotateY(359deg) translateZ(2px);
+        }
+      }
+
+      .star,
+      .star:before,
+      .star:after {
+        content: url("/img/star.png");
+        height: 80px;
+        width: 80px;
+        position: relative;
+        left: calc(50% - 40px);
+        bottom: 25px;
+      }
+
+      .star:before {
+        transform: rotate(72deg);
+        top: -33px;
+        left: -46px;
+      }
+
+      .star:after {
+        transform: rotate(287deg);
+        top: -33px;
+        left: -44px;
+      }
+
+      .shine {
+        background: var(--shine-bg);
+        height: 80px;
+        width: 80px;
+        position: absolute;
+        top: -25px;
+        left: calc(50% - 40px);
+        border-radius: 50%;
+        transform: translateZ(40px);
+        filter: blur(20px);
+        opacity: 0.3;
+        animation: 5s shine linear infinite;
+      }
+
+      @keyframes shine {
+        0% {
+          transform: scale(1) translateZ(40px);
+        }
+        50% {
+          transform: scale(1.5) translateZ(40px);
+        }
+        100% {
+          transform: scale(1) translateZ(40px);
+        }
+      }
+
+      .snow-container {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+      }
+
+      .snow {
+        position: absolute;
+      }
+
+      .snow:before {
+        content: "";
+        background-color: var(--snow-bg);
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .snow-y-1:before {
+        animation: 8s snow-y-1 ease-in infinite, 8s snow-y-0 linear infinite;
+      }
+
+      .snow-y-2:before {
+        animation: 6s snow-y-2 ease-in infinite, 6s snow-y-0 linear infinite;
+      }
+
+      .snow-y-3:before {
+        animation: 4s snow-y-2 ease-in infinite, 4s snow-y-0 linear infinite;
+      }
+
+      .snow-1 {
+        width: 20px;
+        height: 20px;
+        top: calc(50% - 250px);
+        left: calc(50% - 10px);
+        animation: 1s snow-x linear infinite;
+      }
+
+      .snow-2 {
+        width: 15px;
+        height: 15px;
+        top: calc(50% - 300px);
+        left: calc(50% - 30px);
+        animation: 0.8s snow-x linear infinite 0.1s;
+      }
+
+      .snow-3 {
+        width: 10px;
+        height: 10px;
+        top: calc(50% - 400px);
+        left: calc(50% + 60px);
+        animation: 0.6s snow-x linear infinite 0.8s;
+      }
+
+      .snow-4 {
+        width: 25px;
+        height: 25px;
+        top: calc(50% - 200px);
+        left: calc(50% + 50px);
+        animation: 0.5s snow-x linear infinite 0.5s;
+      }
+
+      .snow-5 {
+        width: 18px;
+        height: 18px;
+        top: calc(50% - 200px);
+        left: calc(50% - 50px);
+        animation: 0.5s snow-x linear infinite 0.5s;
+      }
+
+      .snow-6 {
+        width: 12px;
+        height: 12px;
+        top: calc(50% - 150px);
+        left: calc(50% - 120px);
+        animation: 0.8s snow-x linear infinite 0.5s;
+      }
+
+      .snow-7 {
+        width: 20px;
+        height: 20px;
+        top: calc(50% - 150px);
+        left: calc(50% + 75px);
+        animation: 1s snow-x linear infinite 0.6s;
+      }
+
+      .snow-8 {
+        width: 22px;
+        height: 22px;
+        top: calc(50% - 10px);
+        left: calc(50% - 30px);
+        animation: 1s snow-x linear infinite 0.8s;
+      }
+
+      .snow-9 {
+        width: 8px;
+        height: 8px;
+        top: calc(50% - 250px);
+        left: calc(50% - 30px);
+        animation: 1s snow-x linear infinite 0.8s;
+      }
+
+      .snow-10 {
+        width: 13px;
+        height: 13px;
+        top: calc(50% - 250px);
+        left: calc(50% - 100px);
+        animation: 1s snow-x linear infinite 0.8s;
+      }
+
+      @keyframes snow-x {
+        0% {
+          transform: translateX(0px);
+        }
+        25% {
+          transform: translateX(5px);
+        }
+        50% {
+          transform: translateX(0px);
+        }
+        75% {
+          transform: translateX(-5px);
+        }
+        100% {
+          transform: translateX(0px);
+        }
+      }
+
+      @keyframes snow-y-0 {
+        0% {
+          opacity: 1;
+        }
+        60% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+
+      @keyframes snow-y-1 {
+        0% {
+          transform: translateY(0px);
+        }
+        99.99999% {
+          transform: translateY(300px);
+        }
+        100% {
+          transform: translateY(0px);
+        }
+      }
+
+      @keyframes snow-y-2 {
+        0% {
+          transform: translateY(0px);
+        }
+        99.99999% {
+          transform: translateY(400px);
+        }
+        100% {
+          transform: translateY(0px);
+        }
+      }
+
+      @keyframes snow-y-3 {
+        0% {
+          transform: translateY(0px);
+        }
+        99.99999% {
+          transform: translateY(500px);
+        }
+        100% {
+          transform: translateY(0px);
+        }
+      }
+
+      .Container_Snowman {
+        width: 0;
+        height: 0;
+        position: relative;
+        bottom: 140px;
+        right: 23em;
+      }
+
+      .Hat_Top {
+        background-color: rgb(0, 0, 0);
+        position: absolute;
+        left: 92px;
+        top: 17px;
+        width: 60px;
+        height: 46px;
+        z-index: 19;
+      }
+
+      .Hat_Middle {
+        background-color: rgb(255, 0, 0);
+        position: absolute;
+        left: 97px;
+        top: 60px;
+        width: 51px;
+        height: 14px;
+        z-index: 18;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+      }
+
+      .Hat_Bottom {
+        background-color: rgb(0, 0, 0);
+        position: absolute;
+        left: 79px;
+        top: 68px;
+        width: 88px;
+        height: 13px;
+        z-index: 17;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        box-shadow: 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1),
+          0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2),
+          0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2),
+          0 20px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .Scarf_Right {
+        background-color: rgb(0, 191, 243);
+        position: absolute;
+        left: 124px;
+        top: 137px;
+        width: 24px;
+        height: 59px;
+        z-index: 16;
+      }
+
+      .Scarf_Center {
+        background-color: rgb(0, 191, 243);
+        position: absolute;
+        left: 90px;
+        top: 137px;
+        width: 65px;
+        height: 18px;
+        z-index: 17;
+        box-shadow: 0 6px 1px rgba(47, 47, 47, 0.1),
+          0 0 5px rgba(47, 47, 47, 0.1), 0 1px 3px rgba(47, 47, 47, 0.3),
+          0 3px 5px rgba(47, 47, 47, 0.2), 0 5px 10px rgba(47, 47, 47, 0.25),
+          0 10px 10px rgba(47, 47, 47, 0.2), 0 20px 20px rgba(47, 47, 47, 0.15);
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        font-family: Helvetica;
+        font-style: italic;
+        text-align: center;
+        font-size: 14px;
+      }
+
+      .Scarf_Left {
+        background-color: rgb(0, 191, 243);
+        position: absolute;
+        left: 101px;
+        top: 152px;
+        width: 18px;
+        height: 29px;
+        z-index: 14;
+      }
+
+      .Nose {
+        background-color: rgb(242, 101, 34);
+        position: absolute;
+        left: 117px;
+        top: 109px;
+        width: 10px;
+        height: 20px;
+        z-index: 13;
+      }
+
+      .Eye_Right {
+        background-color: rgb(0, 0, 0);
+        position: absolute;
+        left: 127px;
+        top: 95px;
+        width: 9px;
+        height: 8px;
+        z-index: 5;
+      }
+
+      .Eye_Left {
+        background-color: rgb(0, 0, 0);
+        position: absolute;
+        left: 107px;
+        top: 95px;
+        width: 9px;
+        height: 8px;
+        z-index: 4;
+      }
+
+      .Ellipse_Top {
+        border-width: 3.571px;
+        border-color: rgb(233, 233, 233);
+        border-style: solid;
+        border-radius: 50%;
+        background-color: rgb(255, 255, 255);
+        position: absolute;
+        left: 81px;
+        top: 67px;
+        width: 74.858px;
+        height: 76.858px;
+        z-index: 3;
+        box-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9,
+          0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1),
+          0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2),
+          0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2),
+          0 20px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .Ellipse_Middle {
+        border-width: 3.571px;
+        border-color: rgb(233, 233, 233);
+        border-style: solid;
+        border-radius: 50%;
+        background-color: rgb(255, 255, 255);
+        position: absolute;
+        left: 63px;
+        top: 142px;
+        width: 113.858px;
+        height: 106.858px;
+        z-index: 2;
+        box-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9,
+          0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1),
+          0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2),
+          0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2),
+          0 20px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .Ellipse_Bottom {
+        border-width: 3.571px;
+        border-color: rgb(233, 233, 233);
+        border-style: solid;
+        border-radius: 50%;
+        background-color: rgb(255, 255, 255);
+        position: absolute;
+        left: 44px;
+        top: 223px;
+        width: 155.858px;
+        height: 140.858px;
+        z-index: 1;
+        box-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9,
+          0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1),
+          0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2),
+          0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2),
+          0 20px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .Ground {
+        border-width: 3.571px;
+        border-color: rgb(214, 214, 214);
+        border-style: solid;
+        border-radius: 50%;
+        background-color: rgba(135, 135, 135, 0.8);
+        filter: blur(2px);
+        position: absolute;
+        left: 44px;
+        top: 367px;
+        width: 155.858px;
+        height: 10px;
+        z-index: 0;
+      }
+
+      h1 {
+        font-family: cursive;
+        font-style: bold;
+        background: linear-gradient(
+          to right,
+          #ef5350,
+          #f48fb1,
+          #7e57c2,
+          #2196f3,
+          #26c6da,
+          #43a047,
+          #eeff41,
+          #f9a825,
+          #ff5722
+        );
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        position: absolute;
+        top: 0;
+      }
+
+      h2 {
+        font-family: "Helvetica";
+        position: absolute;
+        bottom: 0px;
+        right: 5%;
+        margin-left: 5%;
+        font-style: italic;
+        color: #fff;
+        text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb,
+          0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, 0.1),
+          0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3),
+          0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25),
+          0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Merry Christmas!</h1>
+      <div class="tree">
+        <div class="shadow ts-3d"></div>
+        <div class="trunk ts-3d">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="leaves-bottom ts-3d">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="leaves-middle ts-3d">
+          <div class="ts-3d"></div>
+          <div class="ts-3d"></div>
+          <div class="ts-3d"></div>
+          <div class="ts-3d"></div>
+        </div>
+        <div class="leaves-top ts-3d">
+          <div class="ts-3d"></div>
+          <div class="ts-3d"></div>
+          <div class="ts-3d"></div>
+          <div class="ts-3d"></div>
+        </div>
+        <div class="star star-1 ts-3d"></div>
+        <div class="star star-2 ts-3d"></div>
+        <div class="star star-3 ts-3d"></div>
+        <div class="star star-4 ts-3d"></div>
+        <div class="star star-5 ts-3d"></div>
+        <div class="shine ts-3d"></div>
+      </div>
+      <div class="snow-container">
+        <div class="snow snow-1 snow-y-1"></div>
+        <div class="snow snow-2 snow-y-2"></div>
+        <div class="snow snow-3 snow-y-3"></div>
+        <div class="snow snow-4 snow-y-3"></div>
+        <div class="snow snow-5 snow-y-2"></div>
+        <div class="snow snow-6 snow-y-1"></div>
+        <div class="snow snow-7 snow-y-1"></div>
+        <div class="snow snow-8 snow-y-2"></div>
+        <div class="snow snow-9 snow-y-3"></div>
+        <div class="snow snow-10 snow-y-3"></div>
+      </div>
+      <div class="Container_Snowman">
+        <div class="Hat_Top"></div>
+        <div class="Hat_Middle"></div>
+        <div class="Hat_Bottom"></div>
+        <div class="Scarf_Center"></div>
+        <div class="Scarf_Right"></div>
+        <div class="Scarf_Left"></div>
+        <div class="Nose"></div>
+        <div class="Eye_Right"></div>
+        <div class="Eye_Left"></div>
+        <div class="Ellipse_Top"></div>
+        <div class="Ellipse_Middle"></div>
+        <div class="Ellipse_Bottom"></div>
+        <div class="Ground"></div>
+      </div>
+      <h2>FROM: 123 Elf Road, North Pole, 88888</h2>
+    </div>
+  </body>
+</html>
